@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+overflow-x:hidden;
+}
+
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:30px;
+background:white;
+color:#ff4d6d;
+cursor:pointer;
+margin-top:30px;
+}
+
+.hidden{
+display:none;
+}
+
+.section{
+margin-top:50px;
+padding:20px;
+}
+
+.letter{
+background:white;
+color:#333;
+max-width:500px;
+margin:auto;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.slideshow{
+max-width:300px;
+margin:auto;
+}
+
+.slide{
+display:none;
+}
+
+.slide img{
+width:100%;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+}
+
+.calendar{
+background:white;
+color:#333;
+display:inline-block;
+padding:20px;
+border-radius:15px;
+}
+
+.day{
+display:inline-block;
+width:40px;
+height:40px;
+line-height:40px;
+margin:4px;
+border-radius:50%;
+background:#eee;
+}
+
+.birthday{
+background:#ff4d6d;
+color:white;
+font-weight:bold;
+}
+
+.heart{
+position:fixed;
+font-size:20px;
+color:red;
+animation:hearts 5s linear infinite;
+}
+
+@keyframes hearts{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<h1>🎁 Birthday Surprise</h1>
+
+<button onclick="openSurprise()">Open Your Surprise</button>
+
+<div id="content" class="hidden">
+
+<h1>🎉 Happy Birthday Ahsaan 🎉</h1>
+
+<!-- Letter -->
+
+<div class="section">
+
+<div class="letter">
+
+<h2>💌 A Special Letter</h2>
+
+<p>
+
+Happy Birthday Ahsaan ❤️  
+
+Today is a special day because it brought an amazing person into the world.  
+May your life always be filled with happiness and success.
+
+Stay happy and keep smiling ✨
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Pictures -->
+
+<div class="section">
+
+<h2>📸 Beautiful Memories</h2>
+
+<div class="slideshow">
+
+<div class="slide">
+<img src="pic1.jpg">
+</div>
+
+<div class="slide">
+<img src="pic2.jpg">
+</div>
+
+<div class="slide">
+<img src="pic3.jpg">
+</div>
+
+</div>
+
+</div>
+
+<!-- Calendar -->
+
+<div class="section">
+
+<h2>📅 Your Special Day</h2>
+
+<div class="calendar">
+
+<div class="day">1</div>
+<div class="day">2</div>
+<div class="day">3</div>
+<div class="day">4</div>
+<div class="day">5</div>
+<div class="day">6</div>
+<div class="day">7</div>
+<div class="day">8</div>
+<div class="day">9</div>
+<div class="day">10</div>
+<div class="day">11</div>
+<div class="day">12</div>
+<div class="day">13</div>
+<div class="day">14</div>
+<div class="day">15</div>
+<div class="day">16</div>
+<div class="day">17</div>
+<div class="day">18</div>
+<div class="day">19</div>
+<div class="day">20</div>
+<div class="day">21</div>
+<div class="day">22</div>
+<div class="day">23</div>
+<div class="day">24</div>
+<div class="day">25</div>
+<div class="day">26</div>
+<div class="day">27</div>
+<div class="day">28</div>
+<div class="day">29</div>
+<div class="day">30</div>
+<div class="day birthday">31</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openSurprise(){
+document.getElementById("content").style.display="block";
+}
+
+/* slideshow */
+
+var slideIndex=0;
+
+function showSlides(){
+
+var slides=document.getElementsByClassName("slide");
+
+for(var i=0;i<slides.length;i++){
+slides[i].style.display="none";
+}
+
+slideIndex++;
+
+if(slideIndex>slides.length){
+slideIndex=1;
+}
+
+slides[slideIndex-1].style.display="block";
+
+setTimeout(showSlides,3000);
+
+}
+
+showSlides();
+
+/* hearts */
+
+setInterval(function(){
+
+var heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤";
+
+heart.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),5000);
+
+},600);
+
+/* confetti */
+
+var canvas=document.getElementById("confetti");
+
+var ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+
+canvas.height=window.innerHeight;
+
+var confetti=[];
+
+for(let i=0;i<100;i++){
+
+confetti.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*6+2
+});
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="white";
+
+confetti.forEach(c=>{
+
+ctx.beginPath();
+ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
+ctx.fill();
+
+c.y+=1;
+
+if(c.y>canvas.height){c.y=0;}
+
+});
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+</script>
+
+</body>
+</html>
